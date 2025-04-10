@@ -9,7 +9,7 @@ def calculate_T(X_1, X_2):
 st.set_page_config(page_title="T Calculator", layout="centered")
 
 # Title
-st.title("T Value Calculator")
+st.title("Tensile Value Calculator")
 #st.markdown("**Formula:** T = 15.5832 × (8.7087×X₁)^0.2184 × (2.0952×X₂)^0.0590")
 
 # Number of inputs
