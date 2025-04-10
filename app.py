@@ -7,7 +7,7 @@ def calculate_T(X_1, X_2):
 
 # Streamlit App UI
 st.title("T Value Calculator")
-st.markdown("Calculate T using the formula:**T = 15.5832 × (8.7087×X₁)^0.2184 × (2.0952×X₂)^0.0590**")
+#st.markdown("Calculate T using the formula:**T = 15.5832 × (8.7087×X₁)^0.2184 × (2.0952×X₂)^0.0590**")
 
 # Number of input sets
 n = st.number_input("Enter the number of input sets:", min_value=1, step=1)
