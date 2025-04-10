@@ -5,39 +5,44 @@ def calculate_T(X_1, X_2):
     T = 15.5832 * ((8.7087 * X_1) ** 0.2184) * ((2.0952 * X_2) ** 0.0590)
     return T
 
-# Streamlit App UI
-st.title("T Value Calculator")
-#st.markdown("Calculate T using the formula:**T = 15.5832 × (8.7087×X₁)^0.2184 × (2.0952×X₂)^0.0590**")
+# Page config
+st.set_page_config(page_title="T Calculator", layout="centered")
 
-# Number of input sets
+# Title
+st.title("T Value Calculator")
+#st.markdown("**Formula:** T = 15.5832 × (8.7087×X₁)^0.2184 × (2.0952×X₂)^0.0590")
+
+# Number of inputs
 n = st.number_input("Enter the number of input sets:", min_value=1, step=1)
 
-# Initialize list to store results
 results = []
 
-# Create input fields for each set
+# Input Fields
 for i in range(n):
-    st.subheader(f"Input Set {i+1}")
+    st.subheader(f"Input Set {i + 1}")
     col1, col2 = st.columns(2)
-    
-    with col1:
-        X_1 = st.number_input(f"Enter value of X₁ (Set {i+1})", key=f"x1_{i}", format="%.0f") #, format="%.1f
-    with col2:
-        X_2 = st.number_input(f"Enter value of X₂ (Set {i+1})", key=f"x2_{i}", format="%.0f") #, format="%.1f
-    
-    # Calculate T when both X_1 and X_2 are greater than 0
-    if X_1 > 0 and X_2 > 0:
-        T = calculate_T(X_1, X_2)
-        results.append((i+1, X_1, X_2, T))
-    else:
-        results.append((i+1, X_1, X_2, "Invalid (X₁ and X₂ must be > 0)"))
 
-# Display results
+    with col1:
+        x1_input = st.text_input(f"Enter X₁ (Set {i+1})", key=f"x1_{i}")
+    with col2:
+        x2_input = st.text_input(f"Enter X₂ (Set {i+1})", key=f"x2_{i}")
+
+    if x1_input and x2_input:
+        try:
+            X_1 = float(x1_input)
+            X_2 = float(x2_input)
+
+            if X_1 > 0 and X_2 > 0:
+                T = calculate_T(X_1, X_2)
+                if round(T, 4) not in [0.0000, 1.0000]:
+                    results.append((i + 1, X_1, X_2, T))
+        except ValueError:
+            st.warning(f"Set {i+1}: Please enter valid numeric values for X₁ and X₂.")
+
+# Results
 if results:
     st.subheader("Results")
-    for res in results:
-        set_no, x1, x2, T_val = res
-        if isinstance(T_val, float):
-            st.success(f"Set {set_no}: X₁ = {x1}, X₂ = {x2} → T = {T_val:.4f}")
-        else:
-            st.warning(f"Set {set_no}: X₁ = {x1}, X₂ = {x2} → {T_val}")
+    for set_no, x1, x2, T_val in results:
+        st.success(f"Set {set_no}: X₁ = {x1}, X₂ = {x2} → T = {T_val:.4f}")
+else:
+    st.info("Enter values above to calculate T.")
