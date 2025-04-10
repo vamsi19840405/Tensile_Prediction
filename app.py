@@ -21,9 +21,9 @@ for i in range(n):
     col1, col2 = st.columns(2)
     
     with col1:
-        X_1 = st.number_input(f"Enter value of X₁ (Set {i+1})", key=f"x1_{i}") #, format="%.1f
+        X_1 = st.number_input(f"Enter value of X₁ (Set {i+1})", key=f"x1_{i}", format="%.0f") #, format="%.1f
     with col2:
-        X_2 = st.number_input(f"Enter value of X₂ (Set {i+1})", key=f"x2_{i}") #, format="%.1f
+        X_2 = st.number_input(f"Enter value of X₂ (Set {i+1})", key=f"x2_{i}", format="%.0f") #, format="%.1f
     
     # Calculate T when both X_1 and X_2 are greater than 0
     if X_1 > 0 and X_2 > 0:
